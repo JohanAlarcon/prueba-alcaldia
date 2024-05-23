@@ -72,43 +72,28 @@
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle fa-fw"></i>
+                            @auth
+                                {{ Auth::user() ? Auth::user()->name : 'Invitado' }}
+                            @endauth
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <div class="dropdown-divider"></div>
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user-circle fa-fw"></i>
-                                @auth
-                                    {{ Auth::user()->name }}
-                                @endauth
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <div class="dropdown-divider"></div>
+                            <a href="{{ route('logout') }}" class="dropdown-item"
+                                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i
+                                    class="fas fa-sign-out-alt"></i>&emsp;Cerrar Sesión</a>
 
-                                <a href="{{ route('logout') }}" class="dropdown-item"
-                                    onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><i
-                                        class="fas fa-sign-out-alt"></i>&emsp;Cerrar Sesión</a>
+                        </div>
 
-                            </div>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-
-                        </li>
-                    @endguest
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
                 </ul>
             </nav>
             <!-- /.navbar -->
@@ -131,7 +116,7 @@
                                 alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                            <a href="#" class="d-block">{{ Auth::user() ? Auth::user()->name : '' }}</a>
                         </div>
                     </div>
 

@@ -84,17 +84,20 @@
 
                             <br>
 
-                            <div class="d-flex justify-content-center">
-                                <div class="row mb-3">
+                            <div class="justify-content-center" align="center">
+                                <div class="row">
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <a class="btn btn-success"
+                                            href="{{ route('register') }}">
+                                            <i class="fas fa-user-plus"></i>
+                                            {{ __('Registrarse') }}</a>
+                                    </div>
+                                    <div class="col-md-8">
                                         <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-sign-in-alt"></i>
                                             {{ __('Login') }}
                                         </button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a class="btn btn-success"
-                                            href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                     </div>
 
                                 </div>
